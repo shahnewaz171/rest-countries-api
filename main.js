@@ -40,17 +40,36 @@ const displayCountries = countries =>{
         const countryInfo = `
             <h3 class="country-name">${country.name}</h3>
             <p>${country.capital}</p>
-            <button>Details</button>
+            <button onclick="displayCountryDetails('${country.name}')" >Details</button>
         `;
         countryDiv.innerHTML = countryInfo;
         countriesName.appendChild(countryDiv);
     });
-
-    // for (let i = 0; i < countries.length; i++) {  //skip this part
-        
-    // }
 };
 
+const displayCountryDetails = name =>{
+    const url = `https://restcountries.eu/rest/v2/name/${name}`;
+    fetch(url)
+    .then(res => res.json())
+    // .then(data => console.log(data[0].name));
+    .then(data => renderCountryInfo(data[0]));
+    document.getElementById('countries').style.display = 'none';
+};
+
+const renderCountryInfo = country => {
+    console.log(country);
+    const countryDiv = document.getElementById('country-details');
+    countryDiv.innerHTML = `
+        <h1>${country.name}</h1>
+        <p>${country.population}</p>
+        <p>${country.region}</p>
+        <p>${country.nativeName}</p>
+        <p>${country.timezones}</p>
+        <p>${country.area}</p>
+        <p>${country.subregion}</p>
+        <img src="${country.flag}">
+    `;
+};
 
 //First way//
 // fetch('https://restcountries.eu/rest/v2/all')

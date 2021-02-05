@@ -20,3 +20,14 @@
     grid-gap: 30px;
     padding: 20px;
 }
+
+#country-details img{
+    width: 300px;
+}
+#country-details{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
